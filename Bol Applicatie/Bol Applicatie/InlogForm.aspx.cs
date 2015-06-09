@@ -31,7 +31,7 @@ namespace Bol_Applicatie
 
         protected void btnMaakGebruiker_Click(object sender, EventArgs e)
         {
-            Response.Redirect("MaakAccountForm");
+            Response.Redirect("MaakAccountForm.aspx");
         }
 
         public void GeefMessage(string message)

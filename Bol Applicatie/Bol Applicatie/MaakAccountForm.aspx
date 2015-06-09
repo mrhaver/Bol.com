@@ -15,6 +15,9 @@
         .rbtnVrouw {
             position: absolute;
             left: 15%;
+            top: 117px;
+            width: 101px;
+            height: 22px;
         }
     </style>
 </head>
@@ -30,8 +33,8 @@
         <asp:TextBox ID="tbAchternaam" runat="server" CssClass="AccountInfo"></asp:TextBox>
         <br />
         <asp:Label ID="Label4" runat="server" Text="Geslacht: "></asp:Label>
-        <asp:RadioButton ID="rbtnMan" runat="server" CssClass="AccountInfo" Text="Man" Value="Geslacht"/>
-        <asp:RadioButton ID="rbtnVrouw" runat="server" CssClass="rbtnVrouw" Text="Vrouw" Value="Geslacht"/>
+        <asp:RadioButton ID="rbtnMan" runat="server" CssClass="AccountInfo" Text="Man" Value="Geslacht" GroupName="Geslacht"/>
+        <asp:RadioButton ID="rbtnVrouw" runat="server" CssClass="rbtnVrouw" Text="Vrouw" Value="Geslacht" GroupName="Geslacht"/>
         <br />
         <asp:Label ID="Label3" runat="server" Text="Email: "></asp:Label>
         <asp:TextBox ID="tbEmail" runat="server" CssClass="AccountInfo"></asp:TextBox>

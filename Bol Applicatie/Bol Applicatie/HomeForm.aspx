@@ -27,9 +27,9 @@
             <asp:ListItem></asp:ListItem>
         </asp:ListBox>
         <br />
-        <asp:Button ID="btnVorige" runat="server" Text="Vorige" style="margin-left: 0px" />
+        <asp:Button ID="btnVorige" runat="server" Text="Vorige" style="margin-left: 0px" OnClick="btnVorige_Click" />
         <asp:Button ID="btnKies" runat="server" style="margin-left: 125px" Text="Kies"  OnClick="btnKies_Click"/>
-        <asp:Button ID="btnKiesProduct" runat="server" CssClass="Producten" style="margin-left: 0px; top: 333px; left: 30%;" Text="Kies" />
+        <asp:Button ID="btnKiesProduct" runat="server" CssClass="Producten" style="margin-left: 0px; top: 333px; left: 30%;" Text="Kies" OnClick="btnKiesProduct_Click" />
 
         <br />
         
