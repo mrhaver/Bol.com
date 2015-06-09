@@ -114,7 +114,8 @@ namespace Bol_Applicatie
         }
         #endregion
 
-        public List<Categorie> GeefBovenCategorieen(out string error)
+        #region Categorie en Producten  
+        public List<Categorie> GeefBovensteCategorieen(out string error)
         {
             List<Categorie> categorieen = new List<Categorie>();
             error = "";
@@ -137,7 +138,7 @@ namespace Bol_Applicatie
                 }
                 return categorieen;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 error = "Categorieën niet kunnen vinden";
                 return null;
@@ -155,9 +156,79 @@ namespace Bol_Applicatie
             try
             {
                 conn.Open();
-                string query = "SELECT * FROM CATEGORIE WHERE BOVENCATEGORIE_ID IN ( SELECT ID FROM CATEGORIE WHERE NAAM = '" + categorieNaam + "')";
-                //command.Parameters.Add(new OracleParameter("@NAAM", categorieNaam));
+                string query = "SELECT * FROM CATEGORIE WHERE BOVENCATEGORIE_ID IN ( SELECT ID FROM CATEGORIE WHERE NAAM = :categorieNaam)";              
                 command = new OracleCommand(query, conn);
+                command.Parameters.Add(new OracleParameter("categorieNaam", categorieNaam));
+                OracleDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    if (dataReader[1] is DBNull)
+                    {
+                        categorieen.Add(new Categorie(Convert.ToInt32(dataReader[0]), 0, Convert.ToString(dataReader[2])));
+                    }
+                    else
+                    {
+                        categorieen.Add(new Categorie(Convert.ToInt32(dataReader[0]), Convert.ToInt32(dataReader[1]), Convert.ToString(dataReader[2])));
+                    }
+                }
+                return categorieen;
+            }
+            catch (Exception)
+            {
+                error = "Categorieën niet kunnen vinden";
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public Categorie GeefBovenCategorie(string categorieNaam, out string error)
+        {
+            Categorie categorie = null;
+            error = "";
+            try
+            {
+                conn.Open();
+                string query = "SELECT * FROM CATEGORIE WHERE ID IN ( SELECT BOVENCATEGORIE_ID FROM CATEGORIE WHERE NAAM = :categorieNaam)";
+                command = new OracleCommand(query, conn);
+                command.Parameters.Add(new OracleParameter("categorieNaam", categorieNaam));
+                OracleDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    if (dataReader[1] is DBNull)
+                    {
+                        categorie = new Categorie(Convert.ToInt32(dataReader[0]), 0, Convert.ToString(dataReader[2]));
+                    }
+                    else
+                    {
+                        categorie = new Categorie(Convert.ToInt32(dataReader[0]), Convert.ToInt32(dataReader[1]), Convert.ToString(dataReader[2]));
+                    }
+                }
+                return categorie;
+            }
+            catch (Exception ex)
+            {
+                error = ex.ToString();
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public List<Categorie> GeefBovenCategorieen(string categorieNaam, out string error)
+        {
+            List<Categorie> categorieen = new List<Categorie>();
+            error = "";
+            try
+            {
+                conn.Open();
+                string query = "SELECT * FROM CATEGORIE WHERE BOVENCATEGORIE_ID IN (SELECT BOVENCATEGORIE_ID FROM CATEGORIE WHERE NAAM = categorieNaam)";
+                command = new OracleCommand(query, conn);
+                command.Parameters.Add(new OracleParameter("categorieNaam", categorieNaam));
                 OracleDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
@@ -174,7 +245,7 @@ namespace Bol_Applicatie
             }
             catch (Exception ex)
             {
-                error = "Categorieën niet kunnen vinden";
+                error = ex.ToString();
                 return null;
             }
             finally
@@ -182,6 +253,64 @@ namespace Bol_Applicatie
                 conn.Close();
             }
         }
+
+        public List<Product> GeefProducten(string categorieNaam, out string error)
+        {
+            List<Product> producten = new List<Product>();
+            error = "";
+            try
+            {
+                conn.Open();
+                string query = "SELECT * FROM PRODUCT WHERE CATEGORIE_ID IN ( SELECT ID FROM CATEGORIE WHERE NAAM = :categorieNaam)";
+                command = new OracleCommand(query, conn);
+                command.Parameters.Add(new OracleParameter("categorieNaam", categorieNaam));
+                OracleDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    producten.Add(new Product(Convert.ToString(dataReader["NAAM"]), Convert.ToString(dataReader["BESCHRIJVING"])));
+                }
+                return producten;
+            }
+            catch (Exception ex)
+            {
+                error = ex.ToString();
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public Product GeefProduct(string productNaam, out string error)
+        {
+            Product product = null;
+            error = "";
+            try
+            {
+                conn.Open();
+                string query = "SELECT * FROM PRODUCT WHERE NAAM = :productNaam";
+                command = new OracleCommand(query, conn);
+                command.Parameters.Add(new OracleParameter("productNaam", productNaam));
+                OracleDataReader dataReader = command.ExecuteReader();
+                while(dataReader.Read())
+                {
+                    product = new Product(Convert.ToString(dataReader[2]), Convert.ToString(dataReader[3]));
+                }
+                return product;
+            }
+            catch(Exception ex)
+            {
+                error = ex.ToString();
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        #endregion
     }
         
 

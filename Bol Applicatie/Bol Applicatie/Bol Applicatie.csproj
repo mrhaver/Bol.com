@@ -92,6 +92,7 @@
     <Compile Include="AccountInformatie.aspx.designer.cs">
       <DependentUpon>AccountInformatie.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Administratie.cs" />
     <Compile Include="BeheerForm.aspx.cs">
       <DependentUpon>BeheerForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -122,6 +123,7 @@
     <Compile Include="MaakAccountForm.aspx.designer.cs">
       <DependentUpon>MaakAccountForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Product.cs" />
     <Compile Include="ProductForm.aspx.cs">
       <DependentUpon>ProductForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
