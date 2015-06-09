@@ -1,0 +1,8 @@
+C:\Users\Frank Haver\Documents\P3\SE2\Individuele Opdracht\Bol Applicatie\Bol Applicatie\bin\Bol Applicatie.dll.config
+C:\Users\Frank Haver\Documents\P3\SE2\Individuele Opdracht\Bol Applicatie\Bol Applicatie\bin\Bol Applicatie.dll
+C:\Users\Frank Haver\Documents\P3\SE2\Individuele Opdracht\Bol Applicatie\Bol Applicatie\bin\Bol Applicatie.pdb
+C:\Users\Frank Haver\Documents\P3\SE2\Individuele Opdracht\Bol Applicatie\Bol Applicatie\bin\AjaxControlToolkit.dll
+C:\Users\Frank Haver\Documents\P3\SE2\Individuele Opdracht\Bol Applicatie\Bol Applicatie\obj\Debug\Bol Applicatie.csprojResolveAssemblyReference.cache
+C:\Users\Frank Haver\Documents\P3\SE2\Individuele Opdracht\Bol Applicatie\Bol Applicatie\obj\Debug\Bol Applicatie.dll
+C:\Users\Frank Haver\Documents\P3\SE2\Individuele Opdracht\Bol Applicatie\Bol Applicatie\obj\Debug\Bol Applicatie.pdb
+C:\Users\Frank Haver\Documents\P3\SE2\Individuele Opdracht\Bol Applicatie\Bol Applicatie\bin\Oracle.DataAccess.dll
