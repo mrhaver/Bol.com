@@ -24,11 +24,7 @@ namespace Bol_Applicatie
             conn.ConnectionString = "User Id=" + user + ";Password=" + pw + ";Data Source=" + " //localhost:1521/xe" + ";"; 
         }
 
-        public void TestConnection()
-        {           
-            conn.Open();           
-        }
-
+        #region Account
         // geef een account terug voor een gebruikersnaam
         public Account GeefAccount(string gebruikersNaam)
         {
@@ -55,6 +51,31 @@ namespace Bol_Applicatie
                 conn.Close();
             }
         }
+
+        public bool UpdateBudget(Account account, int budget)
+        {
+            try
+            {
+                string query = "UPDATE ACCOUNT SET BUDGET = :budget WHERE GEBRUIKERSNAAM = :gebruikersNaam";
+                command = new OracleCommand(query, conn);
+                command.Parameters.Add("budget", budget);
+                command.Parameters.Add("gebruikersNaam", account.GebruikersNaam);
+                conn.Open();
+                OracleDataAdapter da = new OracleDataAdapter(command);
+                command.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        #endregion
 
         #region Inloggen
         public bool LogIn(string gebruikersNaam, string wachtWoord, out string error)
@@ -104,6 +125,71 @@ namespace Bol_Applicatie
             return false;
         }
 
+        public bool LogIn(string gebruikersNaam, string wachtWoord, bool isBeheerder, out string error)
+        {
+            int boolIsBeheerder = 0;
+            if(isBeheerder)
+            {
+                boolIsBeheerder = 1;
+            }
+            else
+            {
+                boolIsBeheerder = 0;
+            }
+            try
+            {
+                error = "";
+                conn.Open();
+                // query van alle plaatsen met de eventueel bijbehorende
+                // hoofdboekers
+                string query = "SELECT * FROM ACCOUNT";
+                command = new OracleCommand(query, conn);
+                OracleDataReader dataReader = command.ExecuteReader();
+                // dataReader gaat record voor record omlaag totdat 
+                // er niets meer is.
+                while (dataReader.Read())
+                {
+                    // getal tussen haakjes is de gewenste kolom :D                  
+                    if(Convert.ToString(dataReader["GEBRUIKERSNAAM"]) == gebruikersNaam)
+                    {
+                        if(Convert.ToString(dataReader["WACHTWOORD"]) == wachtWoord)
+                        {
+                            if (Convert.ToInt32(dataReader["ISBEHEERDER"]) == boolIsBeheerder)
+                            {
+                                error = "";
+                                return true;
+                            }
+                            else
+                            {
+                                error = gebruikersNaam + ", je bent helemaal geen beheerder!";
+                                return false;
+                            }
+                        }
+                        else
+                        {
+                            error = "Wachtwoord Ongeldig";
+                            return false;
+                        }
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.ToString());
+                error = ex.ToString();
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            // er is niets gevonden
+            error = "Gebruikersnaam niet gevonden";
+            return false;
+        }
+                   
+
         #endregion
 
         #region Aanmaken
@@ -130,9 +216,9 @@ namespace Bol_Applicatie
                 error = "";
                 return true;
             }
-            catch(Exception ex)
+            catch(Exception)
             {
-                error = ex.ToString();
+                error = "Gebruikersnaam bestaat al";
                 return false;
             }
             finally
@@ -143,6 +229,39 @@ namespace Bol_Applicatie
         #endregion
 
         #region Categorie en Producten  
+        public List<Categorie> AlleCategorieen()
+        {
+            List<Categorie> categorieen = new List<Categorie>();
+            try
+            {
+                conn.Open();
+                string query = "SELECT * FROM CATEGORIE";
+                command = new OracleCommand(query, conn);
+                OracleDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    if (dataReader[1] is DBNull)
+                    {
+                        categorieen.Add(new Categorie(Convert.ToInt32(dataReader[0]), 0, Convert.ToString(dataReader[2])));
+                    }
+                    else
+                    {
+                        categorieen.Add(new Categorie(Convert.ToInt32(dataReader[0]), Convert.ToInt32(dataReader[1]), Convert.ToString(dataReader[2])));
+                    }
+                }
+                return categorieen;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+        }
+        
         public List<Categorie> GeefBovensteCategorieen(out string error)
         {
             List<Categorie> categorieen = new List<Categorie>();
@@ -338,6 +457,62 @@ namespace Bol_Applicatie
             }
         }
 
+        public List<Product> ZoekProducten(string zoekString)
+        {
+            List<Product> producten = new List<Product>();
+            zoekString = "%" + zoekString + "%";
+            try
+            {
+                conn.Open();
+                string query = "SELECT * FROM PRODUCT WHERE UPPER(NAAM) LIKE UPPER(:zoekString)";
+                command = new OracleCommand(query, conn);
+                command.Parameters.Add(new OracleParameter("zoekString", zoekString));
+                OracleDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    producten.Add(new Product(Convert.ToString(dataReader["NAAM"]), Convert.ToString(dataReader["BESCHRIJVING"]), Convert.ToInt32(dataReader["PRIJS"])));
+                }
+                return producten;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public bool NieuwProduct(string categorieNaam, string productNaam, string beschrijving, int prijs, out string error)
+        {
+            try
+            {
+                command = new OracleCommand("NIEUWPRODUCT", conn);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add("P_CATEGORIENAAM", OracleDbType.Varchar2).Value = categorieNaam;
+                command.Parameters.Add("P_PRODUCTNAAM", OracleDbType.Varchar2).Value = productNaam;
+                command.Parameters.Add("P_BESCHRIJVING", OracleDbType.Varchar2).Value = beschrijving;
+                command.Parameters.Add("P_PRIJS", OracleDbType.Int32).Value = prijs;
+                
+                conn.Open();
+                OracleDataAdapter da = new OracleDataAdapter(command);
+                command.ExecuteNonQuery();
+                error = "";
+                return true;
+            }
+            catch (Exception ex)
+            {
+                error = ex.ToString();
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         #endregion
 
         #region Verlanglijst
@@ -416,55 +591,8 @@ namespace Bol_Applicatie
         }
         #endregion
 
-        public List<Product> ZoekProducten(string zoekString)
-        {
-            List<Product> producten = new List<Product>();
-            zoekString = "%" + zoekString + "%";
-            try
-            {
-                conn.Open();
-                string query = "SELECT * FROM PRODUCT WHERE UPPER(NAAM) LIKE UPPER(:zoekString)";
-                command = new OracleCommand(query, conn);
-                command.Parameters.Add(new OracleParameter("zoekString", zoekString));
-                OracleDataReader dataReader = command.ExecuteReader();
-                while (dataReader.Read())
-                {
-                    producten.Add(new Product(Convert.ToString(dataReader["NAAM"]), Convert.ToString(dataReader["BESCHRIJVING"]), Convert.ToInt32(dataReader["PRIJS"])));
-                }
-                return producten;
-            }
-            catch(Exception)
-            {
-                return null;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
+        
 
-        public bool UpdateBudget(Account account, int budget)
-        {
-            try
-            {
-                string query = "UPDATE ACCOUNT SET BUDGET = :budget WHERE GEBRUIKERSNAAM = :gebruikersNaam";
-                command = new OracleCommand(query, conn);
-                command.Parameters.Add("budget", budget);
-                command.Parameters.Add("gebruikersNaam", account.GebruikersNaam);
-                conn.Open();
-                OracleDataAdapter da = new OracleDataAdapter(command);
-                command.ExecuteNonQuery();
-                return true;
 
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
     }
 }

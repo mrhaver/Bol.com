@@ -35,31 +35,8 @@
     
         <br />
     
-    </div>
-
-    <div>
-
         <br />
-        Wijzig Gegevens<br />
     
-        <asp:Label ID="Label1" runat="server" Text="Voornaam: "></asp:Label>
-        <asp:TextBox ID="TextBox1" runat="server" CssClass="AccountInfo"></asp:TextBox>
-        <br />
-        <asp:Label ID="Label2" runat="server" Text="Achternaam: "></asp:Label>
-        <asp:TextBox ID="TextBox2" runat="server" CssClass="AccountInfo"></asp:TextBox>
-        <br />
-        <asp:Label ID="Label3" runat="server" Text="Email: "></asp:Label>
-        <asp:TextBox ID="TextBox3" runat="server" CssClass="AccountInfo"></asp:TextBox>
-        <br />
-        <asp:Label ID="Label5" runat="server" Text="Gebruikersnaam: "></asp:Label>
-        <asp:TextBox ID="TextBox4" runat="server" CssClass="AccountInfo"></asp:TextBox>
-        <br />
-        <asp:Label ID="Label6" runat="server" Text="Wachtwoord: "></asp:Label>
-        <asp:TextBox ID="TextBox5" runat="server" CssClass="AccountInfo"></asp:TextBox>
-        <br />
-        <asp:Button ID="Button3" runat="server" Text="Bevestig" />
-        <br />
-
     </div>
     </form>
 </body>

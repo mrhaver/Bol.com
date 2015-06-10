@@ -12,8 +12,11 @@ namespace Bol_Applicatie
         DatabaseKoppeling dbKoppeling;
         protected void Page_Load(object sender, EventArgs e)
         {
-            VulBudget();
             dbKoppeling = new DatabaseKoppeling();
+            if(!Page.IsPostBack)
+            {
+                VulBudget();
+            }
         }
 
         private void VulBudget()

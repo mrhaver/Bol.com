@@ -33,7 +33,7 @@ namespace Bol_Applicatie
         private void VulVerlanglijst()
         {
             lbVerlanglijst.Items.Clear();
-            foreach (Product p in administratie.NuIngelogd.Verlanglijst)
+            foreach (Product p in administratie.DBKoppeling.GeefVerlanglijst(administratie.NuIngelogd))
             {
                 lbVerlanglijst.Items.Add(p.Naam);
             }            
@@ -66,7 +66,7 @@ namespace Bol_Applicatie
             // die winkelwagen wordt eerst geleegd en daarna gevuld met het verlanglijstje, 
             // daarna wordt het formulier van de winkelwagen geopend
             administratie.NuIngelogd.WinkelWagen.Clear();
-            foreach(Product p in administratie.NuIngelogd.Verlanglijst)
+            foreach(Product p in administratie.DBKoppeling.GeefVerlanglijst(administratie.NuIngelogd))
             {
                 administratie.NuIngelogd.WinkelWagen.Add(p);
             }

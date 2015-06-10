@@ -23,16 +23,32 @@ namespace Bol_Applicatie
             string error = "";
             if(tbGebruikersnaam.Text != "" && tbWachtwoord.Text != "")
             {
-                if (dbKoppeling.LogIn(tbGebruikersnaam.Text, tbWachtwoord.Text, out error))
+                if(rbtnBeheerder.Checked)
                 {
-                    administratie.NuIngelogd = dbKoppeling.GeefAccount(tbGebruikersnaam.Text);
-                    GeefMessage("Inloggen Gelukt");
-                    Response.Redirect("HomeForm.aspx");                 
+                    if(dbKoppeling.LogIn(tbGebruikersnaam.Text, tbWachtwoord.Text, rbtnBeheerder.Checked, out error))
+                    {
+                        administratie.NuIngelogd = dbKoppeling.GeefAccount(tbGebruikersnaam.Text);
+                        GeefMessage("Inloggen Gelukt");
+                        Response.Redirect("BeheerForm.aspx"); 
+                    }
+                    else
+                    {
+                        GeefMessage(error);
+                    }
                 }
                 else
                 {
-                    GeefMessage(error);
-                }
+                    if (dbKoppeling.LogIn(tbGebruikersnaam.Text, tbWachtwoord.Text, out error))
+                    {
+                        administratie.NuIngelogd = dbKoppeling.GeefAccount(tbGebruikersnaam.Text);
+                        GeefMessage("Inloggen Gelukt");
+                        Response.Redirect("HomeForm.aspx");
+                    }
+                    else
+                    {
+                        GeefMessage(error);
+                    }
+                }              
             }
             else
             {

@@ -17,6 +17,7 @@
         .Recensies {
             position: absolute;
             left: 25%;
+            top: 262px;
         }
         .newStyle1 {
             position: absolute;
@@ -33,11 +34,8 @@
         <asp:Button ID="btnVerlanglijst" runat="server" OnClick="btnVerlanglijst_Click1" style="margin-left: 13px" Text="Verlanglijst" />
         <asp:Button ID="btnWinkelwagen" runat="server" OnClick="btnWinkelwagen_Click1" style="margin-left: 11px" Text="Winkelwagen" />
         </h1>
-    <div>
+        <div>
     
-        Productfoto<br />
-        <asp:Image ID="Image1" runat="server" Height="264px" Width="277px" />
-        <br />
         Productbeschrijving:<br />
         <br />
         <asp:Label ID="lblProductBeschrijving" runat="server" Text="Hier komt de productbeschrijving te staan"></asp:Label>
@@ -50,19 +48,7 @@
         <asp:Button ID="btnNaarWinkelwagen" runat="server" Text="Naar Winkelwagen" OnClick="btnNaarWinkelwagen_Click" />
         <asp:Button ID="btnNaarVerlanglijst" runat="server" style="margin-left: 23px" Text="Naar Verlanglijst" OnClick="btnNaarVerlanglijst_Click" />
         <br />
-        <br /> 
-    </div>
-
-    <div id="Vragen_Recensies">
-        Vragen<asp:Label ID="Label2" runat="server" CssClass="Recensies" Text="Recensies"></asp:Label>
-        <br />
-        <asp:ListBox ID="ListBox1" runat="server" Height="308px" Width="279px"></asp:ListBox>
-        <asp:ListBox ID="ListBox2" runat="server" Height="308px" Width="279px" CssClass="Recensies"></asp:ListBox>
-        <br />
-        <br />
-        <asp:Button ID="btnKiesVraag" runat="server" Text="Kies" />
-        <asp:Button ID="btnStelVraag" runat="server" style="margin-left: 52px" Text="Stel Vraag" />
-        <asp:Button ID="btnSchrijfRecensie" runat="server" CssClass="Recensies" Text="Schrijf Recensie" />
+            <br /> 
     </div>
     </form>
 </body>

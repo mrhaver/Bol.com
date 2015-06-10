@@ -14,11 +14,20 @@
             left: 12%;
             position: absolute;
         }
+        #form1 {
+            height: 610px;
+        }
+        .ZoekProduct {
+            left: 300px;
+            position: absolute;
+            top: 555px;
+        }
     </style>
 </head>
-<body>
+<body style="height: 643px">
     <form id="form1" runat="server">
-        <h1>Beheersysteem</h1>
+        <h1>Beheersysteem<asp:Button ID="btnInlogform" runat="server" OnClick="btnInlogform_Click" style="margin-left: 74px" Text="InlogForm" />
+        </h1>
     <div id="ProductToevoegen" class="newStyle1">
                        
         <asp:Label ID="Label1" runat="server" Text="Naam: "></asp:Label>
@@ -30,28 +39,23 @@
         <asp:Label ID="Label3" runat="server" Text="Prijs: "></asp:Label>
         <asp:TextBox ID="tbPrijs" runat="server" CssClass="tbProducten"></asp:TextBox>
         <br />
-        <asp:Label ID="Label4" runat="server" Text="Bestandslocatie: "></asp:Label>
-        <asp:TextBox ID="tbBestandslocatie" runat="server" CssClass="tbProducten" Width="320px"></asp:TextBox>
         <br />
         <br />
-        <asp:Button ID="btnVoegProductToe" runat="server" Text="Voeg Product Toe" />
-        <asp:Button ID="btnPasProductAan" runat="server" style="margin-left: 50px" Text="Pas Product Aan" />
+        <asp:Button ID="btnVoegProductToe" runat="server" Text="Voeg Product Toe" OnClick="btnVoegProductToe_Click" />
+                       
+        <br />
+        <br />
+        <br />
+        Kies voor welke categorie je&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br />
+        een product wilt toevoegen<br />
+        <asp:ListBox ID="lbCategorieen" runat="server" Height="205px" Width="229px"></asp:ListBox>
+        <br />
+        <br />
+        <br />
+        <br />
                        
     </div>
-
-    <div id="Gerapporteerde Berichten">
-        <h2>Verwijder Gerapporteerde Berichten</h2>
         <br />
-        <asp:Button ID="Button1" runat="server" Text="Vragen" />
-        <asp:Button ID="Button2" runat="server" style="margin-left: 18px" Text="Reviews" />
-        <asp:Button ID="Button3" runat="server" style="margin-left: 17px" Text="Antwoorden" />
-        <br />
-        <asp:ListBox ID="lbItems" runat="server" Height="216px" Width="365px"></asp:ListBox>
-        <br />
-        <asp:Button ID="Button4" runat="server" style="margin-left: 0px" Text="Verwijder" />
-        <br />
-
-    </div>
     </form>
 </body>
 </html>

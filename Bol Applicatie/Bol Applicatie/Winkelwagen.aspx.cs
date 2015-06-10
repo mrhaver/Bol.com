@@ -13,7 +13,7 @@ namespace Bol_Applicatie
         DatabaseKoppeling dbKoppeling = new DatabaseKoppeling();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Page.IsPostBack == false)
+            if (!Page.IsPostBack)
             {
                 Ververs();
             }     

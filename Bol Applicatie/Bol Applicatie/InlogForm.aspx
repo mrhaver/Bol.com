@@ -38,6 +38,9 @@
 
     <div class="auto-style1">
         <br />
+        <asp:RadioButton ID="rbtnBeheerder" runat="server" Text="Beheerder" GroupName="InlogType"/>
+        <asp:RadioButton ID="rbtnGebruiker" runat="server" Checked="True" Text="Gebruiker" GroupName="InlogType"/>
+        <br />
         <br />
         <asp:Label ID="Label1" runat="server" CssClass="newStyle1" Text="Gebruikersnaam: "></asp:Label>
         <asp:TextBox ID="tbGebruikersnaam" runat="server" CssClass="GebrWW"></asp:TextBox>
