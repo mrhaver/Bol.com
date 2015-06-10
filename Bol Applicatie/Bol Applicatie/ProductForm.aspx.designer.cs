@@ -31,13 +31,22 @@ namespace Bol_Applicatie {
         protected global::System.Web.UI.WebControls.Label lblProduct;
         
         /// <summary>
-        /// btnWinkelWagen control.
+        /// btnInlog control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnWinkelWagen;
+        protected global::System.Web.UI.WebControls.Button btnInlog;
+        
+        /// <summary>
+        /// btnCategorie control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCategorie;
         
         /// <summary>
         /// btnVerlanglijst control.
@@ -47,6 +56,15 @@ namespace Bol_Applicatie {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnVerlanglijst;
+        
+        /// <summary>
+        /// btnWinkelwagen control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnWinkelwagen;
         
         /// <summary>
         /// Image1 control.
@@ -85,13 +103,13 @@ namespace Bol_Applicatie {
         protected global::System.Web.UI.WebControls.Button btnNaarWinkelwagen;
         
         /// <summary>
-        /// btnNaarWinkelwagen0 control.
+        /// btnNaarVerlanglijst control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNaarWinkelwagen0;
+        protected global::System.Web.UI.WebControls.Button btnNaarVerlanglijst;
         
         /// <summary>
         /// Label2 control.

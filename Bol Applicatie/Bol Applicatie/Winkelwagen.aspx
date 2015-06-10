@@ -13,14 +13,17 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <h1>Winkelwagen</h1>
+    <h1>Winkelwagen<asp:Button ID="btnInlog" runat="server" style="margin-left: 46px" Text="InlogForm" OnClick="btnInlog_Click" />
+        <asp:Button ID="btnCategorie" runat="server" Text="CategorieForm" OnClick="btnCategorie_Click" />
+        <asp:Button ID="btnVerlanglijst" runat="server" OnClick="btnVerlanglijst_Click" Text="Verlanglijst" />
+        </h1>
     <div style="height: 406px">
     
         Winkelwagen Producten<br />
-        <asp:ListBox ID="lbWinkelwagen" runat="server" Height="273px" Width="215px"></asp:ListBox>
+        <asp:ListBox ID="lbWinkelwagen" runat="server" Height="273px" Width="235px"></asp:ListBox>
         <br />
-        <asp:Button ID="btnBetaal" runat="server" Text="Reken Af" />
-        <asp:Button ID="btnVerwijder" runat="server" style="margin-left: 31px" Text="Verwijder" />
+        <asp:Button ID="btnBetaal" runat="server" Text="Reken Af" OnClick="btnBetaal_Click" />
+        <asp:Button ID="btnVerwijder" runat="server" style="margin-left: 31px" Text="Verwijder" OnClick="btnVerwijder_Click" />
     
         <br />
         <br />

@@ -8,13 +8,19 @@
     <style type="text/css">
         .Winkelwagen {
             position: absolute;
-            right: 62%;
-            top: 103px;
+            right: 57%;
+            top: 21px;
             width: 108px;
+            height: 29px;
+            margin-bottom: 0px;
         }
         .Recensies {
             position: absolute;
             left: 25%;
+        }
+        .newStyle1 {
+            position: absolute;
+            top: 20px;
         }
     </style>
 </head>
@@ -22,12 +28,14 @@
     <form id="form1" runat="server">
     <h1>
         <asp:Label ID="lblProduct" runat="server" Text="Label"></asp:Label>
+        &nbsp;&nbsp;&nbsp; <asp:Button ID="btnInlog" runat="server" style="margin-left: 46px" Text="InlogForm" OnClick="btnInlog_Click" />
+        <asp:Button ID="btnCategorie" runat="server" Text="CategorieForm" OnClick="btnCategorie_Click" style="margin-left: 8px" />
+        <asp:Button ID="btnVerlanglijst" runat="server" OnClick="btnVerlanglijst_Click1" style="margin-left: 13px" Text="Verlanglijst" />
+        <asp:Button ID="btnWinkelwagen" runat="server" OnClick="btnWinkelwagen_Click1" style="margin-left: 11px" Text="Winkelwagen" />
         </h1>
     <div>
     
-        Productfoto<asp:Button ID="btnWinkelWagen" runat="server" CssClass="Winkelwagen" Height="38px" Text="Winkelwagen" OnClick="btnWinkelWagen_Click" />
-        <asp:Button ID="btnVerlanglijst" runat="server" style="margin-left: 0px; position: absolute; left: 21%; top: 103px; height: 35px; width: 117px" Text="Verlanglijst" OnClick="btnVerlanglijst_Click" />
-        <br />
+        Productfoto<br />
         <asp:Image ID="Image1" runat="server" Height="264px" Width="277px" />
         <br />
         Productbeschrijving:<br />
@@ -40,7 +48,7 @@
         <br />
         <br />
         <asp:Button ID="btnNaarWinkelwagen" runat="server" Text="Naar Winkelwagen" OnClick="btnNaarWinkelwagen_Click" />
-        <asp:Button ID="btnNaarWinkelwagen0" runat="server" style="margin-left: 23px" Text="Naar Verlanglijst" />
+        <asp:Button ID="btnNaarVerlanglijst" runat="server" style="margin-left: 23px" Text="Naar Verlanglijst" OnClick="btnNaarVerlanglijst_Click" />
         <br />
         <br /> 
     </div>

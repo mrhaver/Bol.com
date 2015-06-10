@@ -29,6 +29,33 @@ namespace Bol_Applicatie
             conn.Open();           
         }
 
+        // geef een account terug voor een gebruikersnaam
+        public Account GeefAccount(string gebruikersNaam)
+        {
+            Account account = null;
+            try
+            {
+                conn.Open();
+                string query = "SELECT * FROM ACCOUNT WHERE GEBRUIKERSNAAM = :gebruikersNaam";
+                command = new OracleCommand(query, conn);
+                command.Parameters.Add(new OracleParameter("gebruikersNaam", gebruikersNaam));
+                OracleDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    account = new Account(Convert.ToString(dataReader["GEBRUIKERSNAAM"]), Convert.ToInt32(dataReader["BUDGET"]));
+                }
+                return account;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         #region Inloggen
         public bool LogIn(string gebruikersNaam, string wachtWoord, out string error)
         {
@@ -313,21 +340,98 @@ namespace Bol_Applicatie
 
         #endregion
 
-        public Account GeefAccount(string gebruikersNaam)
+        #region Verlanglijst
+        public bool AanVerlanglijst(Account account, Product product)
         {
-            Account account = null;
+            try
+            {
+                command = new OracleCommand("VOEGFAVORIETTOE", conn);
+                command.CommandType = CommandType.StoredProcedure;
+
+                command.Parameters.Add("P_GEBRUIKERSNAAM", OracleDbType.Varchar2).Value = account.GebruikersNaam;
+                command.Parameters.Add("P_PRODUCTNAAM", OracleDbType.Varchar2).Value = product.Naam;
+
+                conn.Open();
+                OracleDataAdapter da = new OracleDataAdapter(command);
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public bool UitVerlanglijst(Account account, Product product)
+        {
             try
             {
                 conn.Open();
-                string query = "SELECT * FROM ACCOUNT WHERE GEBRUIKERSNAAM = :gebruikersNaam";
+                string query = "DELETE FROM ACCOUNTFAVORIET WHERE product_ID IN (  SELECT ID FROM PRODUCT WHERE NAAM = :productNaam) AND account_ID IN ( SELECT ID FROM ACCOUNT WHERE GEBRUIKERSNAAM = :gebruikersNaam)";
                 command = new OracleCommand(query, conn);
-                command.Parameters.Add(new OracleParameter("gebruikersNaam", gebruikersNaam));
+                command.Parameters.Add("productNaam", product.Naam);
+                command.Parameters.Add("gebruikersNaam", account.GebruikersNaam);
+                OracleDataAdapter da = new OracleDataAdapter(command);
+                command.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public List<Product> GeefVerlanglijst(Account account)
+        {
+            List<Product> producten = new List<Product>();
+            try
+            {
+                conn.Open();
+                string query = "SELECT p.NAAM, p.BESCHRIJVING, p.PRIJS FROM PRODUCT p, ACCOUNT a, ACCOUNTFAVORIET af WHERE p.ID = af.PRODUCT_ID AND a.ID = af.ACCOUNT_ID AND a.GEBRUIKERSNAAM = :gebruikersNaam";
+                command = new OracleCommand(query, conn);
+                command.Parameters.Add(new OracleParameter("gebruikersNaam", account.GebruikersNaam));
                 OracleDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    account = new Account(Convert.ToString(dataReader["GEBRUIKERSNAAM"]), Convert.ToInt32(dataReader["BUDGET"]));
+                    producten.Add(new Product(Convert.ToString(dataReader["NAAM"]), Convert.ToString(dataReader["BESCHRIJVING"]), Convert.ToInt32(dataReader["PRIJS"])));
                 }
-                return account;
+                return producten;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+        #endregion
+
+        public List<Product> ZoekProducten(string zoekString)
+        {
+            List<Product> producten = new List<Product>();
+            zoekString = "%" + zoekString + "%";
+            try
+            {
+                conn.Open();
+                string query = "SELECT * FROM PRODUCT WHERE UPPER(NAAM) LIKE UPPER(:zoekString)";
+                command = new OracleCommand(query, conn);
+                command.Parameters.Add(new OracleParameter("zoekString", zoekString));
+                OracleDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    producten.Add(new Product(Convert.ToString(dataReader["NAAM"]), Convert.ToString(dataReader["BESCHRIJVING"]), Convert.ToInt32(dataReader["PRIJS"])));
+                }
+                return producten;
             }
             catch(Exception)
             {
@@ -338,8 +442,29 @@ namespace Bol_Applicatie
                 conn.Close();
             }
         }
+
+        public bool UpdateBudget(Account account, int budget)
+        {
+            try
+            {
+                string query = "UPDATE ACCOUNT SET BUDGET = :budget WHERE GEBRUIKERSNAAM = :gebruikersNaam";
+                command = new OracleCommand(query, conn);
+                command.Parameters.Add("budget", budget);
+                command.Parameters.Add("gebruikersNaam", account.GebruikersNaam);
+                conn.Open();
+                OracleDataAdapter da = new OracleDataAdapter(command);
+                command.ExecuteNonQuery();
+                return true;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
-        
-
-
 }

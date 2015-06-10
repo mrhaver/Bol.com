@@ -7,6 +7,7 @@ namespace Bol_Applicatie
 {
     public class Account
     {
+        private Administratie administratie;
         private string voornaam;
         private string achternaam;
         private string geslacht;
@@ -17,6 +18,7 @@ namespace Bol_Applicatie
         private bool gebannt;
         private bool isBeheerder;
         private List<Product> winkelWagen;
+        private List<Product> verlanglijst;
 
         public string GebruikersNaam
         {
@@ -26,6 +28,7 @@ namespace Bol_Applicatie
         public int Budget
         {
             get { return budget; }
+            set { budget = value; }
         }
 
         public List<Product> WinkelWagen
@@ -34,13 +37,24 @@ namespace Bol_Applicatie
             set { winkelWagen = value; }
         }
 
+        public List<Product> Verlanglijst
+        {
+            get { return verlanglijst; }
+            set { verlanglijst = value; }
+        }
+
         public Account(string gebruikersNaam, int budget)
         {
+            administratie = new Administratie();
             this.gebruikersNaam = gebruikersNaam;
             this.budget = budget;
             winkelWagen = new List<Product>();
+            verlanglijst = administratie.DBKoppeling.GeefVerlanglijst(this);
         }
 
+        // winkelwagen is niet gekoppeld aan de database
+        // als iemand uitlogt dan gaat alles uit de winkelwagen
+        #region Winkelwagen
         public bool AanWinkelWagen(Product product)
         {
             foreach(Product p in winkelWagen)
@@ -77,6 +91,70 @@ namespace Bol_Applicatie
                 totaalPrijs += p.Prijs;
             }
             return totaalPrijs;
+        }
+        #endregion 
+
+        // account meegeven voor databasekoppeling
+        public bool AanVerlanglijst(Account account, Product product, out string error)
+        {
+            // als het product al in de verlanglijst zit kan deze er niet aan toegevoegd worden
+            foreach(Product p in verlanglijst)
+            {
+                if(p.Naam == product.Naam)
+                {
+                    error = "Het product staat al in de verlanglijst";
+                    return false;
+                }
+            }
+            if(administratie.DBKoppeling.AanVerlanglijst(account, product))
+            {
+                error = "";
+                Verlanglijst.Add(product);
+                return true;
+            }
+            else
+            {
+                error = "Product kon niet in de database worden toegevoegd";
+                return false;
+            }
+        }
+
+        public bool UitVerlanglijst(Account account, Product product)
+        {
+            if(administratie.DBKoppeling.UitVerlanglijst(account, product))
+            {
+                verlanglijst.Remove(product);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool BetaalWinkelwagen(out string error)
+        {
+            error = "";
+            if (administratie.NuIngelogd.WinkelWagen.Count != 0)
+            {
+                if (administratie.NuIngelogd.Budget >= administratie.NuIngelogd.GeefWinkelwagenPrijs())
+                {
+                    administratie.NuIngelogd.Budget -= administratie.NuIngelogd.GeefWinkelwagenPrijs();
+                    administratie.DBKoppeling.UpdateBudget(administratie.NuIngelogd, administratie.NuIngelogd.Budget);
+                    return true;
+                }
+                else
+                {
+                    error = "U heeft niet voldoende budget";
+                    return false;
+
+                }
+            }
+            else
+            {
+                error = "Nog geen producten in de winkelwagen";
+                return false;
+            }
         }
     }
 }

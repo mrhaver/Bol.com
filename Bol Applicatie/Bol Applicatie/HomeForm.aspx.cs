@@ -166,6 +166,43 @@ namespace Bol_Applicatie
             }
         }
 
+        protected void btnZoek_Click(object sender, EventArgs e)
+        {
+            List<Product> producten = administratie.DBKoppeling.ZoekProducten(tbZoekOpNaam.Text);
+            if(tbZoekOpNaam.Text != "")
+            {               
+                if(producten.Count != 0)
+                {
+                    lbProducten.Items.Clear();
+                    foreach (Product p in producten)
+                    {                       
+                        lbProducten.Items.Add(p.Naam);
+                    }
+                }
+                else
+                {
+                    lbProducten.Items.Clear();
+                    lbProducten.Items.Add("Geen resultaten gevonden");
+                }               
+            }
+        }
+
+        protected void btnInlog_Click(object sender, EventArgs e)
+        {
+            administratie.NuIngelogd = null;
+            Response.Redirect("InlogForm.aspx");
+        }
+
+        protected void btnCategorie_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Winkelwagen.aspx");
+        }
+
+        protected void btnVerlanglijst_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("AccountInformatie.aspx");
+        }
+
 
     }
 }

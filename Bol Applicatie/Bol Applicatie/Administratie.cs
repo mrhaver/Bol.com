@@ -9,6 +9,7 @@ namespace Bol_Applicatie
     {
         private static Product gekozenProduct;
         private static Account nuIngelogd;
+        private DatabaseKoppeling dbKoppeling;
 
         public Product GekozenProduct
         {
@@ -22,9 +23,14 @@ namespace Bol_Applicatie
             set { nuIngelogd = value; }
         }
 
+        public DatabaseKoppeling DBKoppeling
+        {
+            get { return dbKoppeling; }
+        }
+
         public Administratie()
         {
-
+            dbKoppeling = new DatabaseKoppeling();
         }
 
     }

@@ -20,15 +20,20 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <h1>AccountInformatie</h1>
+    <h1>AccountInformatie<asp:Button ID="btnInlog" runat="server" style="margin-left: 46px" Text="InlogForm" OnClick="btnInlog_Click" />
+        <asp:Button ID="btnCategorie" runat="server" Text="CategorieForm" OnClick="btnCategorie_Click" />
+        <asp:Button ID="btnWinkelwagen" runat="server" OnClick="btnVerlanglijst_Click" Text="Winkelwagen" />
+        </h1>
     <div>
     
         <br />
         Verlanglijstje<br />
-        <asp:ListBox ID="ListBox2" runat="server" Height="326px" Width="231px"></asp:ListBox>
+        <asp:ListBox ID="lbVerlanglijst" runat="server" Height="326px" Width="447px"></asp:ListBox>
         <br />
-        <asp:Button ID="Button1" runat="server" Text="Naar Winkelwagen" />
-        <asp:Button ID="Button2" runat="server" style="margin-left: 23px" Text="Verwijder" />
+        <asp:Button ID="btnExWinkelwagen" runat="server" Text="Exporteer Naar Winkelwagen" OnClick="btnExWinkelwagen_Click" />
+        <asp:Button ID="btnVerwijder" runat="server" style="margin-left: 23px" Text="Verwijder" OnClick="btnVerwijder_Click" />
+    
+        <br />
     
     </div>
 
