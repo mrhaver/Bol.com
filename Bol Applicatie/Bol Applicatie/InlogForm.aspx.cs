@@ -10,23 +10,35 @@ namespace Bol_Applicatie
     public partial class InlogForm : System.Web.UI.Page
     {
         DatabaseKoppeling dbKoppeling;
+        Administratie administratie;
+
         protected void Page_Load(object sender, EventArgs e)
         {
             dbKoppeling = new DatabaseKoppeling();
+            administratie = new Administratie();
         }
 
         protected void btnLogIn_Click(object sender, EventArgs e)
         {
             string error = "";
-            if(dbKoppeling.LogIn(tbGebruikersnaam.Text, tbWachtwoord.Text, out error))
+            if(tbGebruikersnaam.Text != "" && tbWachtwoord.Text != "")
             {
-                GeefMessage("Inloggen Gelukt");
-                Response.Redirect("HomeForm.aspx");
+                if (dbKoppeling.LogIn(tbGebruikersnaam.Text, tbWachtwoord.Text, out error))
+                {
+                    administratie.NuIngelogd = dbKoppeling.GeefAccount(tbGebruikersnaam.Text);
+                    GeefMessage("Inloggen Gelukt");
+                    Response.Redirect("HomeForm.aspx");                 
+                }
+                else
+                {
+                    GeefMessage(error);
+                }
             }
             else
             {
-                GeefMessage(error);
+                GeefMessage("Voer Gebruikersnaam En Wachtwoord In");
             }
+            
         }
 
         protected void btnMaakGebruiker_Click(object sender, EventArgs e)

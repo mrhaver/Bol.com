@@ -12,7 +12,9 @@ namespace Bol_Applicatie
         Administratie administratie = new Administratie();
         protected void Page_Load(object sender, EventArgs e)
         {
-            GeefMessage(administratie.Product.Naam);
+            lblProduct.Text = administratie.GekozenProduct.Naam;
+            lblProductBeschrijving.Text = administratie.GekozenProduct.Beschrijving;
+            lblPrijs.Text = Convert.ToString(administratie.GekozenProduct.Prijs);
         }
 
         public void GeefMessage(string message)
@@ -25,6 +27,29 @@ namespace Bol_Applicatie
             sb.Append("')};");
             sb.Append("</script>");
             ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString());
+        }
+
+        protected void btnNaarWinkelwagen_Click(object sender, EventArgs e)
+        {
+            if(administratie.NuIngelogd.AanWinkelWagen(administratie.GekozenProduct))
+            {
+                GeefMessage("Product Toegevoegd Aan Winkelwagen");
+            }
+            else
+            {
+                GeefMessage("Product Bestaat Al In Winkelwagen");
+            }
+
+        }
+
+        protected void btnVerlanglijst_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnWinkelWagen_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Winkelwagen.aspx");
         }
     }
 }

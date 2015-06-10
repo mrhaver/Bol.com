@@ -14,7 +14,7 @@ namespace Bol_Applicatie
     {
         private OracleConnection conn;
         private OracleCommand command;
-        string connectionstring;
+
         public DatabaseKoppeling()
         {
             string user = "BOL";
@@ -76,6 +76,7 @@ namespace Bol_Applicatie
             error = "Gebruikersnaam niet gevonden";
             return false;
         }
+
         #endregion
 
         #region Aanmaken
@@ -226,7 +227,7 @@ namespace Bol_Applicatie
             try
             {
                 conn.Open();
-                string query = "SELECT * FROM CATEGORIE WHERE BOVENCATEGORIE_ID IN (SELECT BOVENCATEGORIE_ID FROM CATEGORIE WHERE NAAM = categorieNaam)";
+                string query = "SELECT * FROM CATEGORIE WHERE BOVENCATEGORIE_ID IN (SELECT BOVENCATEGORIE_ID FROM CATEGORIE WHERE NAAM = :categorieNaam)";
                 command = new OracleCommand(query, conn);
                 command.Parameters.Add(new OracleParameter("categorieNaam", categorieNaam));
                 OracleDataReader dataReader = command.ExecuteReader();
@@ -267,7 +268,7 @@ namespace Bol_Applicatie
                 OracleDataReader dataReader = command.ExecuteReader();
                 while (dataReader.Read())
                 {
-                    producten.Add(new Product(Convert.ToString(dataReader["NAAM"]), Convert.ToString(dataReader["BESCHRIJVING"])));
+                    producten.Add(new Product(Convert.ToString(dataReader["NAAM"]), Convert.ToString(dataReader["BESCHRIJVING"]), Convert.ToInt32(dataReader["PRIJS"])));
                 }
                 return producten;
             }
@@ -295,7 +296,7 @@ namespace Bol_Applicatie
                 OracleDataReader dataReader = command.ExecuteReader();
                 while(dataReader.Read())
                 {
-                    product = new Product(Convert.ToString(dataReader[2]), Convert.ToString(dataReader[3]));
+                    product = new Product(Convert.ToString(dataReader[2]), Convert.ToString(dataReader[3]), Convert.ToInt32(dataReader[4]));
                 }
                 return product;
             }
@@ -311,6 +312,32 @@ namespace Bol_Applicatie
         }
 
         #endregion
+
+        public Account GeefAccount(string gebruikersNaam)
+        {
+            Account account = null;
+            try
+            {
+                conn.Open();
+                string query = "SELECT * FROM ACCOUNT WHERE GEBRUIKERSNAAM = :gebruikersNaam";
+                command = new OracleCommand(query, conn);
+                command.Parameters.Add(new OracleParameter("gebruikersNaam", gebruikersNaam));
+                OracleDataReader dataReader = command.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    account = new Account(Convert.ToString(dataReader["GEBRUIKERSNAAM"]), Convert.ToInt32(dataReader["BUDGET"]));
+                }
+                return account;
+            }
+            catch(Exception)
+            {
+                return null;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
     }
         
 

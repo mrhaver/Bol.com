@@ -8,8 +8,8 @@
     <style type="text/css">
         .Winkelwagen {
             position: absolute;
-            right: 10%;
-            top: 79px;
+            right: 62%;
+            top: 103px;
             width: 108px;
         }
         .Recensies {
@@ -20,21 +20,26 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <h1>ProductNaam</h1>
+    <h1>
+        <asp:Label ID="lblProduct" runat="server" Text="Label"></asp:Label>
+        </h1>
     <div>
     
-        Productfoto<asp:Button ID="Button1" runat="server" CssClass="Winkelwagen" Height="38px" Text="Winkelwagen" />
-        <asp:Button ID="btnVerlanglijst" runat="server" style="margin-left: 0px; position: absolute; left: 70%; top: 79px; height: 35px; width: 117px" Text="Verlanglijst" />
+        Productfoto<asp:Button ID="btnWinkelWagen" runat="server" CssClass="Winkelwagen" Height="38px" Text="Winkelwagen" OnClick="btnWinkelWagen_Click" />
+        <asp:Button ID="btnVerlanglijst" runat="server" style="margin-left: 0px; position: absolute; left: 21%; top: 103px; height: 35px; width: 117px" Text="Verlanglijst" OnClick="btnVerlanglijst_Click" />
         <br />
         <asp:Image ID="Image1" runat="server" Height="264px" Width="277px" />
         <br />
         Productbeschrijving:<br />
         <br />
-        <asp:Label ID="Label1" runat="server" Text="Hier komt de productbeschrijving te staan"></asp:Label>
+        <asp:Label ID="lblProductBeschrijving" runat="server" Text="Hier komt de productbeschrijving te staan"></asp:Label>
         <br />
         <br />
+        Prijs:
+        <asp:Label ID="lblPrijs" runat="server" Text="Label"></asp:Label>
         <br />
-        <asp:Button ID="btnNaarWinkelwagen" runat="server" Text="Naar Winkelwagen" />
+        <br />
+        <asp:Button ID="btnNaarWinkelwagen" runat="server" Text="Naar Winkelwagen" OnClick="btnNaarWinkelwagen_Click" />
         <asp:Button ID="btnNaarWinkelwagen0" runat="server" style="margin-left: 23px" Text="Naar Verlanglijst" />
         <br />
         <br /> 

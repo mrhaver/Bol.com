@@ -7,12 +7,19 @@ namespace Bol_Applicatie
 {
     public class Administratie
     {
-        private static Product product;
+        private static Product gekozenProduct;
+        private static Account nuIngelogd;
 
-        public Product Product
+        public Product GekozenProduct
         {
-            get { return product; }
-            set { product = value; }
+            get { return gekozenProduct; }
+            set { gekozenProduct = value; }
+        }
+
+        public Account NuIngelogd
+        {
+            get { return nuIngelogd; }
+            set { nuIngelogd = value; }
         }
 
         public Administratie()

@@ -77,7 +77,7 @@ namespace Bol_Applicatie
             if(Session["SelectedItemP"] != null)
             {
                 selectedItem = Session["SelectedItemP"].ToString();
-                administratie.Product = dbKoppeling.GeefProduct(selectedItem, out error);
+                administratie.GekozenProduct = dbKoppeling.GeefProduct(selectedItem, out error);
                 Response.Redirect("ProductForm.aspx");
             }            
         }

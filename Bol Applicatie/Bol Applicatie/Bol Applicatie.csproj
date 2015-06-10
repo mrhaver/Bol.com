@@ -85,6 +85,7 @@
     <Content Include="Winkelwagen.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Account.cs" />
     <Compile Include="AccountInformatie.aspx.cs">
       <DependentUpon>AccountInformatie.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

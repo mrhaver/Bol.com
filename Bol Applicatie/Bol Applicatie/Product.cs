@@ -10,6 +10,7 @@ namespace Bol_Applicatie
         // fields
         private string naam;
         private string beschrijving;
+        private int prijs;
 
         public string Naam
         {
@@ -21,10 +22,16 @@ namespace Bol_Applicatie
             get { return beschrijving; }
         }
 
-        public Product(string naam, string beschrijving)
+        public int Prijs
+        {
+            get { return prijs; }
+        }
+
+        public Product(string naam, string beschrijving, int prijs)
         {
             this.naam = naam;
             this.beschrijving = beschrijving;
+            this.prijs = prijs;
         }
 
         public override string ToString()
