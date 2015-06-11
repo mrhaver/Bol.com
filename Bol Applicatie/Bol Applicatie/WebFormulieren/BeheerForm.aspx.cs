@@ -34,14 +34,21 @@ namespace Bol_Applicatie
         protected void btnVoegProductToe_Click(object sender, EventArgs e)
         {
             string error = "";
-            if(administratie.DBKoppeling.NieuwProduct(lbCategorieen.SelectedItem.ToString(), tbNaam.Text, tbBeschrijving.Text, Convert.ToInt32(tbPrijs.Text), out error))
+            if(tbNaam.Text != "" && tbBeschrijving.Text != "" && tbPrijs.Text != "")
             {
-                GeefMessage("Product Toegevoegd");
+                if(lbCategorieen.SelectedItem != null)
+                {
+                    if (administratie.DBKoppeling.NieuwProduct(lbCategorieen.SelectedItem.ToString(), tbNaam.Text, tbBeschrijving.Text, Convert.ToInt32(tbPrijs.Text), out error))
+                    {
+                        GeefMessage("Product Toegevoegd");
+                    }
+                    else
+                    {
+                        GeefMessage(error);
+                    }
+                }             
             }
-            else
-            {
-                GeefMessage(error);
-            }
+            
         }
 
         private void VulOndersteCategorieen()

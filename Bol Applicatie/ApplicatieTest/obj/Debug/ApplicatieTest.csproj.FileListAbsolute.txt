@@ -1,0 +1,8 @@
+C:\Users\Frank Haver\Documents\GitHub\Bol.com\Bol Applicatie\ApplicatieTest\bin\Debug\ApplicatieTest.dll
+C:\Users\Frank Haver\Documents\GitHub\Bol.com\Bol Applicatie\ApplicatieTest\bin\Debug\ApplicatieTest.pdb
+C:\Users\Frank Haver\Documents\GitHub\Bol.com\Bol Applicatie\ApplicatieTest\bin\Debug\Bol Applicatie.dll
+C:\Users\Frank Haver\Documents\GitHub\Bol.com\Bol Applicatie\ApplicatieTest\bin\Debug\Oracle.DataAccess.dll
+C:\Users\Frank Haver\Documents\GitHub\Bol.com\Bol Applicatie\ApplicatieTest\bin\Debug\Bol Applicatie.pdb
+C:\Users\Frank Haver\Documents\GitHub\Bol.com\Bol Applicatie\ApplicatieTest\obj\Debug\ApplicatieTest.csprojResolveAssemblyReference.cache
+C:\Users\Frank Haver\Documents\GitHub\Bol.com\Bol Applicatie\ApplicatieTest\obj\Debug\ApplicatieTest.dll
+C:\Users\Frank Haver\Documents\GitHub\Bol.com\Bol Applicatie\ApplicatieTest\obj\Debug\ApplicatieTest.pdb

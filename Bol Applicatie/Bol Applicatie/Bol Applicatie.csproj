@@ -74,77 +74,77 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AccountInformatie.aspx" />
-    <Content Include="BeheerForm.aspx" />
-    <Content Include="HomeForm.aspx" />
-    <Content Include="InlogForm.aspx" />
-    <Content Include="MaakAccountForm.aspx" />
-    <Content Include="ProductForm.aspx" />
-    <Content Include="VraagForm.aspx" />
+    <Content Include="WebFormulieren\AccountInformatie.aspx" />
+    <Content Include="WebFormulieren\BeheerForm.aspx" />
+    <Content Include="WebFormulieren\HomeForm.aspx" />
+    <Content Include="WebFormulieren\InlogForm.aspx" />
+    <Content Include="WebFormulieren\MaakAccountForm.aspx" />
+    <Content Include="WebFormulieren\ProductForm.aspx" />
+    <Content Include="WebFormulieren\VraagForm.aspx" />
     <Content Include="Web.config" />
-    <Content Include="Winkelwagen.aspx" />
+    <Content Include="WebFormulieren\Winkelwagen.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="AccountInformatie.aspx.cs">
+    <Compile Include="Klassen\Account.cs" />
+    <Compile Include="WebFormulieren\AccountInformatie.aspx.cs">
       <DependentUpon>AccountInformatie.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AccountInformatie.aspx.designer.cs">
+    <Compile Include="WebFormulieren\AccountInformatie.aspx.designer.cs">
       <DependentUpon>AccountInformatie.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Administratie.cs" />
-    <Compile Include="BeheerForm.aspx.cs">
+    <Compile Include="Klassen\Administratie.cs" />
+    <Compile Include="WebFormulieren\BeheerForm.aspx.cs">
       <DependentUpon>BeheerForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="BeheerForm.aspx.designer.cs">
+    <Compile Include="WebFormulieren\BeheerForm.aspx.designer.cs">
       <DependentUpon>BeheerForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Categorie.cs" />
-    <Compile Include="DatabaseKoppeling.cs" />
-    <Compile Include="HomeForm.aspx.cs">
+    <Compile Include="Klassen\Categorie.cs" />
+    <Compile Include="Databaseklasse\DatabaseKoppeling.cs" />
+    <Compile Include="WebFormulieren\HomeForm.aspx.cs">
       <DependentUpon>HomeForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="HomeForm.aspx.designer.cs">
+    <Compile Include="WebFormulieren\HomeForm.aspx.designer.cs">
       <DependentUpon>HomeForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="InlogForm.aspx.cs">
+    <Compile Include="WebFormulieren\InlogForm.aspx.cs">
       <DependentUpon>InlogForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="InlogForm.aspx.designer.cs">
+    <Compile Include="WebFormulieren\InlogForm.aspx.designer.cs">
       <DependentUpon>InlogForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MaakAccountForm.aspx.cs">
+    <Compile Include="WebFormulieren\MaakAccountForm.aspx.cs">
       <DependentUpon>MaakAccountForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MaakAccountForm.aspx.designer.cs">
+    <Compile Include="WebFormulieren\MaakAccountForm.aspx.designer.cs">
       <DependentUpon>MaakAccountForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Product.cs" />
-    <Compile Include="ProductForm.aspx.cs">
+    <Compile Include="Klassen\Product.cs" />
+    <Compile Include="WebFormulieren\ProductForm.aspx.cs">
       <DependentUpon>ProductForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ProductForm.aspx.designer.cs">
+    <Compile Include="WebFormulieren\ProductForm.aspx.designer.cs">
       <DependentUpon>ProductForm.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VraagForm.aspx.cs">
+    <Compile Include="WebFormulieren\VraagForm.aspx.cs">
       <DependentUpon>VraagForm.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="VraagForm.aspx.designer.cs">
+    <Compile Include="WebFormulieren\VraagForm.aspx.designer.cs">
       <DependentUpon>VraagForm.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Winkelwagen.aspx.cs">
+    <Compile Include="WebFormulieren\Winkelwagen.aspx.cs">
       <DependentUpon>Winkelwagen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Winkelwagen.aspx.designer.cs">
+    <Compile Include="WebFormulieren\Winkelwagen.aspx.designer.cs">
       <DependentUpon>Winkelwagen.aspx</DependentUpon>
     </Compile>
   </ItemGroup>

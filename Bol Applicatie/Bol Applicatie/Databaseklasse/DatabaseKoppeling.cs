@@ -24,6 +24,23 @@ namespace Bol_Applicatie
             conn.ConnectionString = "User Id=" + user + ";Password=" + pw + ";Data Source=" + " //localhost:1521/xe" + ";"; 
         }
 
+        public bool TestConnectie()
+        {
+            try
+            {
+                conn.Open();
+                return true;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
         #region Account
         // geef een account terug voor een gebruikersnaam
         public Account GeefAccount(string gebruikersNaam)
@@ -590,9 +607,6 @@ namespace Bol_Applicatie
             }
         }
         #endregion
-
-        
-
 
     }
 }

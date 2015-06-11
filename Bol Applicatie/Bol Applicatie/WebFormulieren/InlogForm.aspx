@@ -46,7 +46,7 @@
         <asp:TextBox ID="tbGebruikersnaam" runat="server" CssClass="GebrWW"></asp:TextBox>
         <br />
         <asp:Label ID="Label2" runat="server" CssClass="newStyle1" Text="Wachtwoord: "></asp:Label>
-        <asp:TextBox ID="tbWachtwoord" runat="server" CssClass="GebrWW"></asp:TextBox>
+        <asp:TextBox ID="tbWachtwoord" runat="server" CssClass="GebrWW" TextMode ="Password"></asp:TextBox>
         <br />
         <asp:Button ID="btnLogIn" runat="server" CssClass="newStyle2" style="margin-left: 0px" Text="Log In" OnClick="btnLogIn_Click" />
         <asp:Button ID="btnMaakGebruiker" runat="server" CssClass="newStyle2" Text="Maak Gebruiker" OnClick="btnMaakGebruiker_Click" />

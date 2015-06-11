@@ -119,6 +119,8 @@ namespace Bol_Applicatie
             }
         }
 
+        // haal voor een bepaald product voor een bepaald account een product uit de verlanglijst
+        // (uit de database)
         public bool UitVerlanglijst(Account account, Product product)
         {
             if(administratie.DBKoppeling.UitVerlanglijst(account, product))
@@ -132,15 +134,17 @@ namespace Bol_Applicatie
             }
         }
 
+        // afrekenen van een winkelwagen
         public bool BetaalWinkelwagen(out string error)
         {
             error = "";
-            if (administratie.NuIngelogd.WinkelWagen.Count != 0)
+            if (this.WinkelWagen.Count != 0)
             {
-                if (administratie.NuIngelogd.Budget >= administratie.NuIngelogd.GeefWinkelwagenPrijs())
+                // als de persoon genoeg budget heeft dan haal de kosten van de winkelwagen van het budget af
+                if (this.Budget >= this.GeefWinkelwagenPrijs())
                 {
-                    administratie.NuIngelogd.Budget -= administratie.NuIngelogd.GeefWinkelwagenPrijs();
-                    administratie.DBKoppeling.UpdateBudget(administratie.NuIngelogd, administratie.NuIngelogd.Budget);
+                    this.Budget -= this.GeefWinkelwagenPrijs();
+                    administratie.DBKoppeling.UpdateBudget(this, this.Budget);
                     return true;
                 }
                 else
