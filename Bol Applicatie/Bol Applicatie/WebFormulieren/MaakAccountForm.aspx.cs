@@ -65,10 +65,34 @@ namespace Bol_Applicatie
                                         GeefMessage(foutmelding);
                                     }
                                 }
+                                else
+                                {
+                                    GeefMessage("Vul je wachtwoord in");
+                                }
+                            }
+                            else
+                            {
+                                GeefMessage("Vul een gebruikersnaam in");
                             }
                         }
+                        else
+                        {
+                            GeefMessage("Vul uw email in");
+                        }
+                    }
+                    else
+                    {
+                        GeefMessage("Selecteer uw geslacht");
                     }
                 }
+                else
+                {
+                    GeefMessage("Achternaam niet ingevuld");
+                }
+            }
+            else
+            {
+                GeefMessage("Voornaam niet ingevuld");
             }
         }
 

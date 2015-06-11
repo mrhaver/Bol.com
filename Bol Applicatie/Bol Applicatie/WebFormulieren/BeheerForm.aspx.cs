@@ -46,7 +46,15 @@ namespace Bol_Applicatie
                     {
                         GeefMessage(error);
                     }
-                }             
+                }
+                else
+                {
+                    GeefMessage("Selecteer aan welke categorie je het product wilt toevoegen");
+                }
+            }
+            else
+            {
+                GeefMessage("Er zijn nog velden niet ingevuld");
             }
             
         }
